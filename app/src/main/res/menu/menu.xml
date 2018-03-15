@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/gitHub"
+        android:title="bryan5151" />
+    <item android:id="@+id/mainPage"
+        android:title="Google" />
+    <item android:id="@+id/facebook"
+        android:title="Facebook" />
+    <item android:id="@+id/customURL"
+        android:title="URL"
+        app:showAsAction="always"></item>
+
+    <EditText
+        android:id="@+id/editTextResult"
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="URL"
+        android:inputType="text"
+        >
+
+    </EditText>
+    <item android:id="@+id/manage"
+        android:title="Tabs"
+        app:showAsAction="always"></item>
+    <item android:id="@+id/refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="Refresh"
+        app:showAsAction="always" />
+    <item android:id="@+id/app_settings"
+        android:title="Settings"></item>
+
+
+</menu>

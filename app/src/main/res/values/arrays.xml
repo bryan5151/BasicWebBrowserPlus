@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listentries">
+        <item>Chrome Mobile</item>
+        <item>Chrome Desktop</item>
+        <!-- <item>List item 3</item>
+        <item>List item 4</item>-->
+    </string-array>
+    <string-array name="listvalues">
+        <item>Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3361.0 Mobile Safari/537.36
+</item>
+        <item>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.106 Safari/537.36</item>
+        <!--<item>3</item>
+        <item>4</item>-->
+    </string-array>
+</resources>
