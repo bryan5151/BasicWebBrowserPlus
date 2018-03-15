@@ -52,28 +52,13 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Activity> activities= new ArrayList<>();
     private WebView mWebView;
     private String mUrl = "google.com";
-    private String receivedUrl;
     private String mTitle = "";
     private static final String TAG = "MainActivity";
     private String usrAgent;// = "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3361.0 Mobile Safari/537.36";
     private String usrAgentChromeMobile = "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3361.0 Mobile Safari/537.36";
     private String usrAgentChromeDesktop = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.106 Safari/537.36";
     final Context context = this;
-
-    ProgressBar progressBar;
-
-    public WebView getWebView() {
-        return mWebView;
-    }
-
-    public MainActivity(){
-
-
-
-
-    }
-
-
+    private ProgressBar progressBar;
 
 
     @Override
