@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <!--<item
+        android:id="@+id/refresh"
+        android:title="Refresh"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/show_title"
+        android:title="Show Page Title"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/show_url"
+        android:title="Show URL"
+        app:showAsAction="always"
+        />-->
+    <item
+        android:id="@+id/downloadImage"
+        android:title="Download Image"
+        app:showAsAction="always"
+        />
+
+
+
+</menu>
