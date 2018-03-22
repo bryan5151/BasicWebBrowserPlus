@@ -17,6 +17,7 @@ package com.example.bryanlocaluse.testwebbrowser;
         import android.os.Environment;
         import android.os.Message;
         import android.preference.PreferenceManager;
+        import android.support.annotation.NonNull;
         import android.support.v4.app.ActivityCompat;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
@@ -31,6 +32,7 @@ package com.example.bryanlocaluse.testwebbrowser;
         import android.view.View;
         import android.webkit.CookieManager;
         import android.webkit.DownloadListener;
+        import android.webkit.GeolocationPermissions;
         import android.webkit.MimeTypeMap;
         import android.webkit.URLUtil;
         import android.webkit.WebChromeClient;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     public static final String CLASSTAG=MainActivity.class.getName();
     public static ArrayList<Activity> activities= new ArrayList<>();
+    private Activity thisInstance;
     private WebView mWebView;
     private String backupMUrl;
     private String mUrl = "google.com";
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activities.add(this);
+        thisInstance = this;
         setContentView(R.layout.activity_main);
         backupMUrl = mUrl;
         initializeVarsFromSharedPreferences();
@@ -77,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar1);
         // Request to render the web page
         renderWebPage(mUrl);
-
         //
         //public void registerForContextMenu (View view)
         //Registers a context menu to be shown for the given view (multiple views can show the
@@ -87,12 +90,9 @@ public class MainActivity extends AppCompatActivity {
         //
         //Parameters
         //view : The view that should show a context menu.
-
         /** First step to show a custom context menu on web view**/
         registerForContextMenu(mWebView);
-
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -169,10 +169,20 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 progressBar.setProgress(newProgress);
             }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                Log.v(TAG, "called");
+                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {} //need to rephrase this
+                    else {
+                    ActivityCompat.requestPermissions(thisInstance, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                        mWebView.onPause();
+                    callback.invoke(origin, true, false);
+                    }
+            }
         });
-
-
-
+        mWebView.getSettings().setGeolocationEnabled(true);
+        mWebView.getSettings().setGeolocationDatabasePath( context.getFilesDir().getPath() );
         mWebView.getSettings().setUserAgentString(usrAgent);
         // Enable the javascript
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -249,6 +259,23 @@ public class MainActivity extends AppCompatActivity {
                 mWebView.loadUrl(urlToRender);
             } else mWebView.loadUrl("https://www.google.com/search?q=" + urlToRender);
         }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this,"Permission granted.", Toast.LENGTH_SHORT).show();
+                // perform your action here
+
+            } else {
+                Toast.makeText(this,"Permission not granted.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     /**
@@ -454,7 +481,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
     @Override
     public void onBackPressed() {
         if (mWebView.canGoBack()) {
@@ -463,7 +489,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
     @Override
     public void onDestroy()
     {
@@ -478,4 +503,3 @@ public class MainActivity extends AppCompatActivity {
         usrAgent = prefList;
     }
 }
-
